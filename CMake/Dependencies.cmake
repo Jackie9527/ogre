@@ -32,6 +32,13 @@ if(CMAKE_CROSSCOMPILING)
             -DANDROID_ABI=${ANDROID_ABI}
             -DANDROID_NDK=${ANDROID_NDK})
     endif()
+
+    if(OHOS)
+        set(CROSS ${CROSS}
+            -DOHOS_PLATFORM_LEVEL=${OHOS_PLATFORM_LEVEL}
+            -DOHOS_ARCH=${OHOS_ARCH}
+            -DOHOS_NDK=${OHOS_NDK})
+    endif()
     
     if(APPLE_IOS)
         set(CROSS ${CROSS}
@@ -212,7 +219,7 @@ find_package(Freetype)
 macro_log_feature(FREETYPE_FOUND "freetype" "Portable font engine" "http://www.freetype.org")
 
 # Find X11
-if (UNIX AND NOT APPLE AND NOT ANDROID AND NOT EMSCRIPTEN)
+if (UNIX AND NOT APPLE AND NOT ANDROID AND NOT OHOS AND NOT EMSCRIPTEN)
   find_package(X11 REQUIRED)
   macro_log_feature(X11_FOUND "X11" "X Window system" "http://www.x.org")
 endif ()
@@ -223,7 +230,7 @@ endif ()
 #######################################################################
 
 # Find OpenGL
-if(NOT ANDROID AND NOT EMSCRIPTEN)
+if(NOT ANDROID AND NOT OHOS AND NOT EMSCRIPTEN)
   find_package(OpenGL)
   macro_log_feature(OPENGL_FOUND "OpenGL" "Support for the OpenGL and OpenGL 3+ render systems" "http://www.opengl.org/")
 endif()
@@ -255,7 +262,7 @@ endif()
 #######################################################################
 
 # Find Cg
-if (NOT (APPLE_IOS OR WINDOWS_STORE OR WINDOWS_PHONE OR ANDROID OR EMSCRIPTEN))
+if (NOT (APPLE_IOS OR WINDOWS_STORE OR WINDOWS_PHONE OR ANDROID OR OHOS OR EMSCRIPTEN))
   find_package(Cg)
   macro_log_feature(Cg_FOUND "cg" "C for graphics shader language" "http://developer.nvidia.com/object/cg_toolkit.html")
 endif ()
@@ -310,7 +317,7 @@ endif()
 #######################################################################
 
 # Find sdl2
-if(NOT ANDROID AND NOT EMSCRIPTEN)
+if(NOT ANDROID AND NOT OHOS AND NOT EMSCRIPTEN)
   # find script does not work in cross compilation environment
   find_package(SDL2 QUIET)
   macro_log_feature(SDL2_FOUND "SDL2" "Simple DirectMedia Library needed for input handling in samples" "https://www.libsdl.org/")

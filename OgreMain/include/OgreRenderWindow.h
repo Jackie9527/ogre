@@ -218,7 +218,7 @@ namespace Ogre
           */
         void setDeactivateOnFocusChange(bool deactivate);
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN || OGRE_PLATFORM == OGRE_PLATFORM_OHOS
         virtual void _notifySurfaceDestroyed() = 0;
         virtual void _notifySurfaceCreated(void* nativeWindow, void* config = NULL) = 0;
 #endif

@@ -25,37 +25,47 @@
  THE SOFTWARE.
  -----------------------------------------------------------------------------
  */
-#ifndef __GLSLESProgramCommon_H__
-#define __GLSLESProgramCommon_H__
+#include "OgreFileSystemLayer.h"
 
-#include "OgreGLES2Prerequisites.h"
-#include "OgreGpuProgram.h"
-#include "OgreHardwareVertexBuffer.h"
-#include "OgreGLUniformCache.h"
-#include "OgreGLSLProgramCommon.h"
-#include "OgreGLSLESProgram.h"
+#include <unistd.h>
 
-namespace Ogre {
-    /** C++ encapsulation of GLSL ES Program Object
-     
-     */
-
-    class _OgreGLES2Export GLSLESProgramCommon : public GLSLProgramCommon MANAGED_RESOURCE
+namespace Ogre
+{
+    String FileSystemLayer::resolveBundlePath(String path)
     {
-    protected:
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN || OGRE_PLATFORM == OGRE_PLATFORM_OHOS
-        void notifyOnContextLost() override;
+        return path;
+    }
 
-        void notifyOnContextReset() override;
-#endif
-        /// Constructor should only be used by GLSLESLinkProgramManager and GLSLESProgramPipelineManager
-        GLSLESProgramCommon(const GLShaderList& shaders);
-    public:
-        /// Get the the binary data of a program from the microcode cache
-        static bool getMicrocodeFromCache(uint32 id, GLuint programHandle);
-        static void _writeToCache(uint32 id, GLuint programHandle);
-        static void bindFixedAttributes(GLuint program);
-    };
+    void FileSystemLayer::getConfigPaths()
+    {
+    }
+    //---------------------------------------------------------------------
+    void FileSystemLayer::prepareUserHome(const Ogre::String& subdir)
+    {
+    }
+    //---------------------------------------------------------------------
+    bool FileSystemLayer::fileExists(const Ogre::String& path)
+    {
+        return access(path.c_str(), 00) == 0;
+    }
+    //---------------------------------------------------------------------
+    bool FileSystemLayer::createDirectory(const Ogre::String& path)
+    {
+        return false;
+    }
+    //---------------------------------------------------------------------
+    bool FileSystemLayer::removeDirectory(const Ogre::String& path)
+    {
+        return false;
+    }
+    //---------------------------------------------------------------------
+    bool FileSystemLayer::removeFile(const Ogre::String& path)
+    {
+        return false;
+    }
+    //---------------------------------------------------------------------
+    bool FileSystemLayer::renameFile(const Ogre::String& oldname, const Ogre::String& newname)
+    {
+        return false;
+    }
 }
-
-#endif // __GLSLESProgramCommon_H__

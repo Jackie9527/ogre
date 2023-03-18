@@ -98,6 +98,28 @@ namespace OgreBites
     };
 
     typedef ApplicationContextAndroid ApplicationContext;
+#elif OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+    class _OgreBitesExport ApplicationContextOHOS : public ApplicationContextBase
+    {
+    public:
+        explicit ApplicationContextOHOS(const Ogre::String& appName = "Ogre3D");
+
+        void initAppForOHOS();
+        void _fireInputEventOHOS(void* event, int wheel = 0);
+
+        void locateResources() override;
+        void shutdown() override;
+        void pollEvents() override;
+
+        NativeWindowPair
+        createWindow(const Ogre::String& name, uint32_t w = 0, uint32_t h = 0,
+                     Ogre::NameValuePairList miscParams = Ogre::NameValuePairList()) override;
+
+    protected:
+
+    };
+
+    typedef ApplicationContextOHOS ApplicationContext;
 #else
     typedef ApplicationContextBase ApplicationContext;
 #endif

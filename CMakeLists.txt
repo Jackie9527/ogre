@@ -251,6 +251,19 @@ elseif (ANDROID)
 
   # workaround for the legacy android toolchain
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+elseif (OHOS)
+  set(TargetPlatform "OHOS")
+  set(OGRE_PLATFORM OGRE_PLATFORM_OHOS)
+
+  set(OGRE_BUILD_RENDERSYSTEM_GLES2 TRUE CACHE BOOL "Forcing OpenGL ES 2 RenderSystem for OHOS" FORCE)
+  set(OGRE_CONFIG_ENABLE_PVRTC TRUE CACHE BOOL "Forcing PVRTC codec for OpenGL ES" FORCE)
+
+  set(OGRE_BUILD_PLUGIN_PCZ FALSE CACHE BOOL "Disable pcz on OHOS" FORCE)
+  set(OGRE_BUILD_TOOLS FALSE CACHE BOOL "Disable tools on OHOS" FORCE)
+  set(OGRE_STATIC TRUE CACHE BOOL "Forcing static build for OHOS" FORCE)
+
+  # workaround for the legacy OHOS toolchain
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 elseif(EMSCRIPTEN)
   add_definitions(-DEMSCRIPTEN=1 -D__EMSCRIPTEN__=1)
   set(TargetPlatform "Emscripten")

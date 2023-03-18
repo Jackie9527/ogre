@@ -66,6 +66,14 @@ elseif(ANDROID)
   list(REMOVE_ITEM PLATFORM_SOURCE_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/Android/OgreAPKZipArchive.cpp"
   )
+
+elseif(OHOS)
+
+  file(GLOB PLATFORM_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/OHOS/*.cpp")
+  # Remove optional platform source files
+  list(REMOVE_ITEM PLATFORM_SOURCE_FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/OHOS/OgreHAPZipArchive.cpp"
+  )
 elseif (UNIX)
   file(GLOB PLATFORM_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/GLX/*.cpp")
 
@@ -136,6 +144,10 @@ if (OGRE_CONFIG_ENABLE_ZIP)
 
   if(ANDROID)
     list(APPEND PLATFORM_SOURCE_FILES src/Android/OgreAPKZipArchive.cpp)
+  endif()
+
+  if(OHOS)
+    list(APPEND PLATFORM_SOURCE_FILES src/OHOS/OgreHAPZipArchive.cpp)
   endif()
 endif ()
 

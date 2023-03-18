@@ -55,7 +55,7 @@ void ApplicationContextBase::initApp()
     createRoot();
     if (!oneTimeConfig()) return;
 
-#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID && OGRE_PLATFORM != OGRE_PLATFORM_OHOS
     // if the context was reconfigured, set requested renderer
     if (!mFirstRun) mRoot->setRenderSystem(mRoot->getRenderSystemByName(mNextRenderer));
 #endif
@@ -77,7 +77,7 @@ void ApplicationContextBase::closeApp()
     shutdown();
     if (mRoot)
     {
-#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID && OGRE_PLATFORM != OGRE_PLATFORM_OHOS
         mRoot->saveConfig();
 #endif
         OGRE_DELETE mRoot;
@@ -174,7 +174,7 @@ void ApplicationContextBase::setup()
 
 void ApplicationContextBase::createRoot()
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_OHOS
     mRoot = OGRE_NEW Ogre::Root("");
 #else
     Ogre::String pluginsPath;
@@ -205,7 +205,7 @@ bool ApplicationContextBase::oneTimeConfig()
         return false;
     }
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_OHOS
     mRoot->setRenderSystem(mRoot->getAvailableRenderers().front());
 #else
     if (!mRoot->restoreConfig()) {
@@ -428,6 +428,9 @@ void ApplicationContextBase::locateResources()
     Ogre::String resourcesPath = mFSLayer->getConfigFilePath("resources.cfg");
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
     Ogre::Archive* apk = Ogre::ArchiveManager::getSingleton().load("", "APKFileSystem", true);
+    cf.load(apk->open(resourcesPath));
+#elif OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+    Ogre::Archive* apk = Ogre::ArchiveManager::getSingleton().load("", "HAPFileSystem", true);
     cf.load(apk->open(resourcesPath));
 #else
 

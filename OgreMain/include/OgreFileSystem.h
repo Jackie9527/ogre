@@ -83,6 +83,16 @@ namespace Ogre {
         AAssetManager* mAssetMgr;
     };
 
+    class HAPFileSystemArchiveFactory : public ArchiveFactory
+    {
+    public:
+        HAPFileSystemArchiveFactory() {}
+        virtual ~HAPFileSystemArchiveFactory() {}
+        /// @copydoc FactoryObj::getType
+        const String& getType(void) const override;
+        /// @copydoc ArchiveFactory::createInstance
+        Archive *createInstance( const String& name, bool readOnly ) override;
+    };
     /** @} */
     /** @} */
 

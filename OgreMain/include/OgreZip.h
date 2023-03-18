@@ -112,6 +112,19 @@ namespace Ogre {
     };
 #endif
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+    class HAPZipArchiveFactory : public EmbeddedZipArchiveFactory
+    {
+    public:
+        HAPZipArchiveFactory() {}
+        virtual ~HAPZipArchiveFactory() {}
+
+        const String& getType(void) const override;
+        Archive *createInstance( const String& name, bool readOnly ) override;
+        void destroyInstance( Archive* ptr) override;
+    };
+#endif
+
     /** @} */
     /** @} */
 

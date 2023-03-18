@@ -63,7 +63,7 @@ void GLES2HardwareOcclusionQuery::destroyQuery()
     OGRE_CHECK_GL_ERROR(glDeleteQueriesEXT(1, &mQueryID));
 }
 //------------------------------------------------------------------
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN || OGRE_PLATFORM == OGRE_PLATFORM_OHOS
 void GLES2HardwareOcclusionQuery::notifyOnContextLost()
 {
     destroyQuery();

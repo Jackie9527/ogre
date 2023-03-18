@@ -44,8 +44,12 @@ namespace Ogre
     /** \addtogroup General
     *  @{
     */
-
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
     class AndroidLogListener;
+#endif
+#if OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+    class OHOSLogListener;
+#endif
     class ShadowTextureManager;
 
     typedef std::vector<RenderSystem*> RenderSystemList;
@@ -85,6 +89,9 @@ namespace Ogre
         std::unique_ptr<LogManager> mLogManager;
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
         std::unique_ptr<AndroidLogListener> mAndroidLogger;
+#endif
+#if OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+        std::unique_ptr<OHOSLogListener> mOHOSLogger;
 #endif
         std::unique_ptr<ScriptCompilerManager> mCompilerManager;
         std::unique_ptr<DynLibManager> mDynLibManager;

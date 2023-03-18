@@ -149,7 +149,7 @@ namespace Ogre {
         void preExtraThreadsStarted() override;
         void postExtraThreadsStarted() override;
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_OHOS || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN
         virtual void resetRenderer(RenderWindow* pRenderWnd) = 0;
         virtual void notifyOnContextLost() = 0;
 #endif

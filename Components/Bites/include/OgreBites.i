@@ -55,6 +55,20 @@ JNIEnv* OgreJNIGetEnv();
 }
 %feature("director") OgreBites::ApplicationContextAndroid;
 %rename(ApplicationContext) ApplicationContextAndroid;
+#elifdef __OHOS__
+%{
+
+
+%}
+
+%ignore OgreBites::ApplicationContextOHOS::initApp;
+%ignore OgreBites::ApplicationContextOHOS::initAppForOHOS(AAssetManager*, ANativeWindow*);
+%extend OgreBites::ApplicationContextOHOS {
+    void initAppForOHOS() {
+    }
+}
+%feature("director") OgreBites::ApplicationContextOHOS;
+%rename(ApplicationContext) ApplicationContextOHOS;
 #else
 %feature("director") OgreBites::ApplicationContextSDL;
 %rename(ApplicationContext) ApplicationContextSDL; // keep the pre 1.12 name

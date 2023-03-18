@@ -20,7 +20,7 @@ if(EMSCRIPTEN)
 endif()
 
 # Find X11
-if (UNIX AND NOT APPLE AND NOT ANDROID AND NOT EMSCRIPTEN)
+if (UNIX AND NOT APPLE AND NOT ANDROID AND NOT OHOS AND NOT EMSCRIPTEN)
   find_library(XAW_LIBRARY NAMES Xaw Xaw7 PATHS ${OGRE_DEP_SEARCH_PATH} ${DEP_LIB_SEARCH_DIR} ${X11_LIB_SEARCH_PATH})
   macro_log_feature(XAW_LIBRARY "Xaw" "X11 Athena widget set for ConfigDialog" "http://www.x.org")
   mark_as_advanced(XAW_LIBRARY)
@@ -105,9 +105,11 @@ if(SDL2_FOUND OR EMSCRIPTEN)
   list(APPEND SOURCES  "${CMAKE_CURRENT_SOURCE_DIR}/src/OgreApplicationContextSDL.cpp")
 elseif(ANDROID)
   list(APPEND SOURCES  "${CMAKE_CURRENT_SOURCE_DIR}/src/OgreApplicationContextAndroid.cpp")
+elseif(OHOS)
+  list(APPEND SOURCES  "${CMAKE_CURRENT_SOURCE_DIR}/src/OgreApplicationContextOHOS.cpp")
 endif()
 
-if(ANDROID OR EMSCRIPTEN OR APPLE_IOS OR WINDOWS_STORE OR WINDOWS_PHONE)
+if(ANDROID OR OHOS OR EMSCRIPTEN OR APPLE_IOS OR WINDOWS_STORE OR WINDOWS_PHONE)
   # no config dialog available
 elseif(WIN32)
   include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")

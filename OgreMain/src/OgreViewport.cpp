@@ -50,7 +50,7 @@ namespace Ogre {
         , mIsAutoUpdated(true)
 		, mColourBuffer(CBT_BACK)
     {           
-#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID && OGRE_PLATFORM != OGRE_PLATFORM_OHOS
         LogManager::getSingleton().stream(LML_TRIVIAL)
             << "Creating viewport on target '" << target->getName() << "'"
             << ", rendering from camera '" << (cam != 0 ? cam->getName() : "NULL") << "'"

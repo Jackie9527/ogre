@@ -50,7 +50,7 @@ ProgramWriterManager& ProgramWriterManager::getSingleton(void)
 ProgramWriterManager::ProgramWriterManager()
 {
     // Add standard shader writer factories
-#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID && OGRE_PLATFORM != OGRE_PLATFORM_OHOS
     addProgramWriter("glsl", new GLSLProgramWriter());
     addProgramWriter("hlsl", new CGProgramWriter());
 #endif

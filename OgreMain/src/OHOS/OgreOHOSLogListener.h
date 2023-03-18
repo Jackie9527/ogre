@@ -25,47 +25,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
-#ifndef __GLES2ManagedResource_H__
-#define __GLES2ManagedResource_H__
 
-#include "OgreGLES2Prerequisites.h"
+#ifndef __OHOSLogListener_H__
+#define __OHOSLogListener_H__
 
-namespace Ogre {
+#include "OgreLog.h"
 
-#define HANDLE_CONTEXT_LOSS (OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN || OGRE_PLATFORM == OGRE_PLATFORM_OHOS)
-
-#if HANDLE_CONTEXT_LOSS
-#   define MANAGED_RESOURCE , public GLES2ManagedResource
-#   define MANAGED_RESOURCE_SINGLE : public GLES2ManagedResource
+namespace Ogre
+{
     
-    class EGLContext;
-    
-    /** Represents a GLES2 rendering resource.
-    Provide unified interface to
-    handle various device states.
-    */
-    class _OgrePrivate GLES2ManagedResource
+    class OHOSLogListener : public LogListener, public LogAlloc
     {
-
-    // Interface.
     public:
-
-        // Called immediately after the Android context has entered a lost state.
-        virtual void notifyOnContextLost() {}
-
-        // Called immediately after the Android context has been reset.
-        virtual void notifyOnContextReset() {}
-
-    public:
-        GLES2ManagedResource();
-        virtual ~GLES2ManagedResource();
+        void messageLogged(const String& message, LogMessageLevel lml, bool maskDebug, const String &logName, bool& skipThisMessage ) override;
     };
-
-#else
-#   define MANAGED_RESOURCE
-#   define MANAGED_RESOURCE_SINGLE
-#endif
-
 }
 
 #endif

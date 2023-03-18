@@ -76,6 +76,9 @@ THE SOFTWARE.
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/OgreAndroidLogListener.h"
 #endif
+#if OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+#include "OHOS/OgreOHOSLogListener.h"
+#endif
 
 namespace Ogre {
     //-----------------------------------------------------------------------
@@ -133,6 +136,10 @@ namespace Ogre {
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
         mAndroidLogger.reset(new AndroidLogListener());
         mLogManager->getDefaultLog()->addListener(mAndroidLogger.get());
+#endif
+#if OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+        mOHOSLogger.reset(new OHOSLogListener());
+        mLogManager->getDefaultLog()->addListener(mOHOSLogger.get());
 #endif
 
         mDynLibManager.reset(new DynLibManager());
@@ -264,6 +271,9 @@ namespace Ogre {
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
         mLogManager->getDefaultLog()->removeListener(mAndroidLogger.get());
+#endif
+#if OGRE_PLATFORM == OGRE_PLATFORM_OHOS
+        mLogManager->getDefaultLog()->removeListener(mOHOSLogger.get());
 #endif
     }
 

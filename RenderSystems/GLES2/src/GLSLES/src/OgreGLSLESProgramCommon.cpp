@@ -124,7 +124,7 @@ namespace Ogre {
         GpuProgramManager::getSingleton().addMicrocodeToCache(id, newMicrocode);
     }
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_EMSCRIPTEN || OGRE_PLATFORM == OGRE_PLATFORM_OHOS
     void GLSLESProgramCommon::notifyOnContextLost()
     {
         mLinked = false;
